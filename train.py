@@ -56,8 +56,9 @@ if __name__ == '__main__':
             img_ = img.eval()
             #print(img_.shape)
         for annotation in annotations:
-            if data['id'] == annotation['id']:
+            if data['id'] == annotation['image_id']:
                 bbox = annotation['bbox']
+                print('id:',data['id'],':',bbox)
                 p1 = (int(bbox[0]), int(bbox[1]))
                 p2 = (int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3]))
                 imageShow = cv2.imread(image)
