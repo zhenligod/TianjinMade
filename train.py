@@ -58,13 +58,18 @@ if __name__ == '__main__':
         for annotation in annotations:
             if data['id'] == annotation['image_id']:
                 bbox = annotation['bbox']
+                category_id = annotation['category_id']
                 print('id:',data['id'],':',bbox)
                 p1 = (int(bbox[0]), int(bbox[1]))
                 p2 = (int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3]))
                 imageShow = cv2.imread(image)
-                cv2.rectangle(imageShow, p1, p2, (255,0,0), 2, 1)
-                cv2.imshow('image', imageShow)
-                c = cv2.waitKey(0)
+                #trainImage = cv2.rectangle(imageShow, p1, p2, (255,0,0), 2, 1)
+                trainImageSavePath = './' + str(category_id) + '/' + str(bbox[0]) + '.jpg'
+                print(trainImageSavePath)
+                cropImg = imageShow[int(bbox[1]):int(bbox[1] + bbox[3]), int(bbox[0]):int(bbox[0] + bbox[2])]
+                cv2.imwrite(trainImageSavePath, cropImg)
+                cv2.imshow('image', cropImg)
+                c = cv2.waitKey(10)
                 if c & 0xFF == ord('q'):
                     break        
  
