@@ -21,6 +21,7 @@ import plotly.graph_objs as go
 import plotly.tools as tls
 import tensorflow as tf
 import cv2
+from PIL import Image
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import log_loss
 
@@ -36,8 +37,18 @@ def GetTrainPicList(input_dir):
         fileListArr.append(temp_dir)
     return fileListArr
 
-
-
+def GetTrainNpData(categoryIdPicArr):
+    for picFilename in categoryIdPicArr: 
+        img = Image.open(picFilename)
+        img = np.asarray(img, dtype = np.float32)
+        print("anger_img in line 60")
+        print(img)
+        print(img.shape[0],img.shape[1])
 
 if __name__ == '__main__':
-    print(GetTrainPicList('./1'))
+    categoryId1PicArr = GetTrainPicList('./1')
+    categoryId2PicArr = GetTrainPicList('./2')
+    categoryId3PicArr = GetTrainPicList('./3')
+    categoryId4PicArr = GetTrainPicList('./4')
+    categoryId5PicArr = GetTrainPicList('./5')
+    GetTrainNpData(categoryId1PicArr)
